@@ -2,14 +2,13 @@ const gulp = require('gulp');
 const concat = require('gulp-concat');
 const browserSync = require('browser-sync').create();
 const sass = require('gulp-sass');
-const babel = require('gulp-babel');
  
 sass.compiler = require('node-sass');
 
 let devMode = false;
 
 gulp.task('sass', function () {
-    return gulp.src('./src/style/**/*.scss')
+    return gulp.src('src/style/**/*.scss')
       .pipe(sass().on('error', sass.logError))
       .pipe(gulp.dest('dist/css'))
       .pipe(browserSync.reload({
@@ -23,9 +22,6 @@ gulp.task('js', function() {
         "node_modules/angular-route/angular-route.js",
         "src/app/**/*.js"
     ])
-        .pipe(babel({
-            presets: ['@babel/env']
-        }))
         .pipe(concat('bundle.js'))
         .pipe(gulp.dest('dist/js'))
         .pipe(browserSync.reload({
@@ -57,7 +53,8 @@ gulp.task('browser-sync', function() {
 
 gulp.task('dev', gulp.parallel('build', 'browser-sync'), function() {
     devMode = true;
-    gulp.watch(['./src/style/**/*.scss'], ['sass']);
-    gulp.watch(['./src/components/**/*.js'], ['js']);
-    gulp.watch(['./src/components/**/*.html'], ['html']);
+
+    gulp.watch('src/style/**/*.scss', 'sass');
+    gulp.watch('src/app/**/*.js', 'js');
+    gulp.watch('src/app/**/*.html', 'html');
 });

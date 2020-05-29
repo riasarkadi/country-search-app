@@ -1,10 +1,13 @@
 <div class="app ui container">
     <h1>Search Countries:</h1>
     <searchbar></searchbar>
-    <div class="selected-elements">
-        <ul>
-            <li>selected</li>
-        </ul>
+    <div class="selected-countries">
+        <h3>Selected:</h3>
+        <a ng-click="$ctrl.removeItem(selected.isoCode)" class="ui label"  ng-repeat="selected in $ctrl.selectedCountries">
+            {{ selected.name }}
+            <i class="delete icon"></i>
+        </a>
+        <span ng-hide="$ctrl.selectedCountries.length > 0">none</span>
     </div>
-    <button type="submit">Submit</button>
+    <button ng-click="$ctrl.submitHandler()" type="submit" class="ui secondary button">Submit</button>
 </div>

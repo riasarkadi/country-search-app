@@ -1,5 +1,6 @@
 const gulp = require('gulp');
 const concat = require('gulp-concat');
+const sourcemaps = require('gulp-sourcemaps');
 const browserSync = require('browser-sync').create();
 const sass = require('gulp-sass');
  
@@ -22,7 +23,9 @@ gulp.task('js', function() {
         "node_modules/angular-route/angular-route.js",
         "src/app/**/*.js"
     ])
+        .pipe(sourcemaps.init())
         .pipe(concat('bundle.js'))
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest('dist/js'))
         .pipe(browserSync.reload({
             stream: true

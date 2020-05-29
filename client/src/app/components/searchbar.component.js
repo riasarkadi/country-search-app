@@ -6,10 +6,10 @@ angular.
     }
 );
 
-SearchbarController.$inject = ['$scope', '$log', '$http'];
+SearchbarController.$inject = ['$scope', '$log', '$http', 'countryService', '$rootScope'];
 
-function SearchbarController($scope, $log, $http) {    
-    const fetchCountries = (param) => {
+function SearchbarController($scope, $log, $http, countryService, $rootScope) {    
+    /* const fetchCountries = (param) => {
         $http.get('/mocks/countryData.json')
             .then((res) => {
                 const filteredData = res.data.filter(c => c.name.toLowerCase().includes(param));
@@ -18,13 +18,19 @@ function SearchbarController($scope, $log, $http) {
             }).catch((err) => {
                 $log.log(err);
             })
+    } */
+
+    this.clickHandler = function(code) {
+        console.log(code);
+        this.selected = this.countries.filter(c => c.isoCode === code)[0];
+        console.log(this.selected);
+        $rootScope.$emit("select", this.selected);
     }
 
     this.keyUpHandler = function($event) {
         if (this.country.length > 1) {
-            fetchCountries(this.country);
-        } else {
-            this.countries = [];
+            countryService.getCountries(this.country);
+            this.countries = countryService.countryData;
         }
     }
     

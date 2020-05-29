@@ -3,5 +3,5 @@
     <input id="country" type="text" placeholder="Search country" ng-model="$ctrl.country" ng-keyup="$ctrl.keyUpHandler($event)">
 </div>
 <div class="ui vertical menu" ng-if="$ctrl.countries.length > 0">
-    <a ng-repeat="country in $ctrl.countries" class="item">{{ country.name }}</a>
+    <a ng-click="$ctrl.clickHandler(country.isoCode)" ng-repeat="country in $ctrl.countries" class="item">{{ country.name }}</a>
 </div>

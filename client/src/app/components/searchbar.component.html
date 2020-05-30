@@ -1,7 +1,11 @@
-<div class="ui input">
-    <label for="country">Country</label>
-    <input id="country" type="text" placeholder="Search country" ng-model="$ctrl.country" ng-keyup="$ctrl.keyUpHandler($event)">
-</div>
-<div class="ui vertical menu" ng-if="$ctrl.countries.length > 0">
-    <a ng-click="$ctrl.clickHandler(country.isoCode)" ng-repeat="country in $ctrl.countries" class="item">{{ country.name }}</a>
+<div class="searchbar">
+    <h3>Country:</h3>
+    <div class="ui fluid input">
+        <input autocomplete="off" type="text" placeholder="Search..." ng-model="$ctrl.text"
+            ng-keyup="$ctrl.keyUpHandler()" ng-blur="$ctrl.blurHandler()" />
+    </div>
+    <div class="searchlist ui vertical menu fluid" ng-if="$ctrl.countries.length > 0">
+        <a ng-click="$ctrl.clickHandler(country.isoCode)" ng-repeat="country in $ctrl.countries"
+            class="item">{{ country.name }}</a>
+    </div>
 </div>

@@ -6,22 +6,37 @@ CountryService.$inject = ['$log', '$http'];
 
 function CountryService($log, $http) {
     let countryData = [];
-    const getCountries = (param) => {
-        $http.get('/mocks/countryData.json')
+
+    const fetchCountries = (param) => {
+        reset();
+        $http.get(`http://localhost:8080/countries?search=${param}`)
             .then((res) => {
-                const filteredData = res.data.filter(c => c.name.toLowerCase().includes(param));
-                countryData.push(...filteredData);
+                countryData.push(...res.data);
             }).catch((err) => {
                 $log.log(err);
             })
     }
-    
-    const resetCountryData = () => {
-        countryData = [];
+
+    const postCountries = (data) => {
+        console.log(data);
+        const postData = { isoCodes: data };
+        $http({
+            method: "POST",
+            url: 'http://localhost:8080/selectedCountries',
+            data: postData
+        }).then(function (res) {
+            console.log(res)
+        }, function (res) {
+            console.log(res)
+        });
     }
 
+    const reset = () => countryData.splice(0, countryData.length)
+
     return {
-        getCountries: (param) => getCountries(param),
+        fetch: fetchCountries,
+        post: postCountries,
+        reset: reset,
         countryData: countryData
     }
 }

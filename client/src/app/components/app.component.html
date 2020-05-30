@@ -1,13 +1,22 @@
 <div class="app ui container">
-    <h1>Search Countries:</h1>
-    <searchbar></searchbar>
-    <div class="selected-countries">
-        <h3>Selected:</h3>
-        <a ng-click="$ctrl.removeItem(selected.isoCode)" class="ui label"  ng-repeat="selected in $ctrl.selectedCountries">
-            {{ selected.name }}
-            <i class="delete icon"></i>
-        </a>
-        <span ng-hide="$ctrl.selectedCountries.length > 0">none</span>
+    <h1>Country Search App</h1>
+    <div class="ui stackable two column grid">
+        <div class="column">
+            <searchbar></searchbar>
+        </div>
+        <div class="column">
+            <div class="selected-countries">
+                <h3>Selected:</h3>
+                <div class="display">
+                    <a ng-click="$ctrl.removeItem(selected.isoCode)" class="ui label"
+                        ng-repeat="selected in $ctrl.selectedCountries">
+                        {{ selected.name }}
+                        <i class="delete icon"></i>
+                    </a>
+                    <span ng-hide="$ctrl.selectedCountries.length > 0">No country selected yet</span>
+                </div>
+            </div>
+            <button ng-click="$ctrl.submitHandler()" type="submit" class="ui secondary button right">Submit</button>
+        </div>
     </div>
-    <button ng-click="$ctrl.submitHandler()" type="submit" class="ui secondary button">Submit</button>
 </div>

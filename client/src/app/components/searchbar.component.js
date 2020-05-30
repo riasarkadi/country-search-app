@@ -3,35 +3,28 @@ angular.
     component('searchbar', {
         templateUrl: 'components/searchbar.component.html',
         controller: SearchbarController
-    }
-);
+    });
 
-SearchbarController.$inject = ['$scope', '$log', '$http', 'countryService', '$rootScope'];
+SearchbarController.$inject = ['countryService', 'selectService'];
 
-function SearchbarController($scope, $log, $http, countryService, $rootScope) {    
-    /* const fetchCountries = (param) => {
-        $http.get('/mocks/countryData.json')
-            .then((res) => {
-                const filteredData = res.data.filter(c => c.name.toLowerCase().includes(param));
-                $log.log(filteredData);
-                this.countries = filteredData;
-            }).catch((err) => {
-                $log.log(err);
-            })
-    } */
+function SearchbarController(countryService, selectService) {
 
-    this.clickHandler = function(code) {
-        console.log(code);
-        this.selected = this.countries.filter(c => c.isoCode === code)[0];
-        console.log(this.selected);
-        $rootScope.$emit("select", this.selected);
+    this.clickHandler = function (code) {
+        const country = this.countries.filter(c => c.isoCode === code)[0];
+        selectService.select(country);
     }
 
-    this.keyUpHandler = function($event) {
-        if (this.country.length > 1) {
-            countryService.getCountries(this.country);
+    this.keyUpHandler = function () {
+        if (this.text.length > 1) {
+            countryService.fetch(this.text);
             this.countries = countryService.countryData;
+        } else {
+            countryService.reset();
         }
     }
-    
+
+    /* this.blurHandler = function () {
+        countryService.reset();
+    } */
+
 }

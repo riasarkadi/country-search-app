@@ -3,27 +3,21 @@ angular.
     component('appComponent', {
         templateUrl: 'components/app.component.html',
         controller: AppController
-    }
-);
+    });
 
-AppController.$inject = ['$scope', '$rootScope'];
+AppController.$inject = ['countryService', 'selectService'];
 
-function AppController($scope, $rootScope) {
-    this.selectedCountries = [];
+function AppController(countryService, selectService) {
+    this.selectedCountries = selectService.countries;
 
-    this.removeItem = function(code) {
-        this.selectedCountries = this.selectedCountries.filter(c => !(c.isoCode === code));
-    }
-
-    this.submitHandler = function() {
-        const isoCodes = this.selectedCountries.map(c => {
-            return c.isoCode;
-        })
-
-        console.log(isoCodes);
+    this.removeItem = function (code) {
+        selectService.remove(code);
     }
 
-    $rootScope.$on("select", (event, data) => {
-        this.selectedCountries.push(data);
-    })
+    this.submitHandler = function () {
+        const isoCodes = selectService.isoCodes();
+
+        countryService.post(isoCodes);
+        selectService.clear();
+    }
 }

@@ -1,0 +1,10 @@
+<div class="display">
+    <a ng-click="$ctrl.removeItem(selected.isoCode)" class="ui label" ng-repeat="selected in $ctrl.selectedCountries">
+        {{ selected.name }}
+        <i class="delete icon"></i>
+    </a>
+    <span ng-hide="$ctrl.selectedCountries.length > 0">No country selected yet</span>
+</div>
+<button ng-click="$ctrl.submitHandler()" type="submit" ng-disabled="$ctrl.selectedCountries.length === 0"
+    class="ui secondary button right">Submit</button>
+<span ng-if="$ctrl.submitMessage" class="submit-message">{{ $ctrl.submitMessage }}</span>

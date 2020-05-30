@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 router.get('/countries', (req, res) => {
     if (req.query.search) {
         const param = req.query.search.toLowerCase();
-        const filtered = countries.filter(c => c.name.toLowerCase().includes(param));
+        const filtered = countries.filter(c => c.name.toLowerCase().indexOf(param) === 0);
 
         if (filtered.length > 0) {
             res.send(filtered);
@@ -30,10 +30,10 @@ router.get('/countries', (req, res) => {
 
 router.post('/selectedCountries', (req, res) => {
     if (req.body.isoCodes) {
-        console.log(`Selected countries: ${req.body.isoCodes}`);
-        res.send('success');
+        const text = `Selected countries: ${req.body.isoCodes}`;
+        res.send(text);
     } else {
-        res.send('failure');
+        res.status(500).send('500 Internal Server Error');
     }
     res.end();
 });

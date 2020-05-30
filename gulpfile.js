@@ -1,38 +1,39 @@
 const gulp = require('gulp');
 const concat = require('gulp-concat');
-const sourcemaps = require('gulp-sourcemaps');
 const browserSync = require('browser-sync').create();
 const sass = require('gulp-sass');
- 
+var babel = require('gulp-babel');
+var uglify = require('gulp-uglify');
+
 sass.compiler = require('node-sass');
 
 let devMode = false;
 
 gulp.task('sass', function () {
     return gulp.src('src/style/**/*.scss')
-      .pipe(sass().on('error', sass.logError))
-      .pipe(gulp.dest('dist/css'))
-      .pipe(browserSync.reload({
-        stream: true
-    }));
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest('dist/css'))
+        .pipe(browserSync.reload({
+            stream: true
+        }));
 });
 
-gulp.task('js', function() {
+gulp.task('js', function () {
     gulp.src([
         "node_modules/angular/angular.js",
         "node_modules/angular-route/angular-route.js",
         "src/app/**/*.js"
     ])
-        .pipe(sourcemaps.init())
+        .pipe(babel({ "presets": ["@babel/preset-env"] }))
+        .pipe(uglify())
         .pipe(concat('bundle.js'))
-        .pipe(sourcemaps.write())
         .pipe(gulp.dest('dist/js'))
         .pipe(browserSync.reload({
             stream: true
         }));
 });
 
-gulp.task('html', function() {
+gulp.task('html', function () {
     return gulp.src([
         'src/app/**/*.html',
         'src/index.html'
@@ -45,7 +46,7 @@ gulp.task('html', function() {
 
 gulp.task('build', gulp.parallel('sass', 'js', 'html'));
 
-gulp.task('browser-sync', function() {
+gulp.task('browser-sync', function () {
     browserSync.init(null, {
         open: false,
         server: {
@@ -54,7 +55,7 @@ gulp.task('browser-sync', function() {
     });
 });
 
-gulp.task('dev', gulp.parallel('build', 'browser-sync'), function() {
+gulp.task('dev', gulp.parallel('build', 'browser-sync'), function () {
     devMode = true;
 
     gulp.watch('src/style/**/*.scss', 'sass');

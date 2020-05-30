@@ -1,6 +1,4 @@
-angular.
-    module('countrySearch').
-    factory('selectService', SelectService);
+app.factory('selectService', SelectService);
 
 SelectService.$inject = [];
 
@@ -10,7 +8,15 @@ function SelectService() {
     const isoCodes = () => selected.map(c => c.isoCode);
 
     const select = (country) => {
-        selected.push(country);
+        if (selected.length > 0) {
+            const countrySelected = selected.filter(c => c.isoCode === country.isoCode);
+
+            if (countrySelected.length === 0) {
+                selected.push(country);
+            };
+        } else {
+            selected.push(country);
+        }
     }
 
     const remove = (code) => {

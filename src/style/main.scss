@@ -17,14 +17,21 @@
     .searchlist {
         position: absolute;
         left: 0;
-        top: 74px;
+        top: 37px;
     }
 }
 .ui.menu {
     margin-top: 0;
     border-radius: 0;
 }
+.ui.label {
+    margin-bottom: 5px;
+}
 .display {
     min-height: 100px;
     padding: 0 0 1em 0;
+}
+.post-message {
+    display: inline-block;
+    margin: 0 10px;
 }

@@ -8,7 +8,7 @@
     "dev": "gulp dev",
     "build": "gulp build",
     "server": "cross-env NODE_ENV=development nodemon ./server/index.js",
-    "test": "jasmine"
+    "test": "karma start karma.conf.js"
   },
   "author": "",
   "license": "ISC",

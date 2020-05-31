@@ -9,11 +9,8 @@ function CountryService($log, $http) {
             .then((res) => {
                 return res.data;
             }, function (res) {
-                if (res.status === 404) {
-                    console.log('No such country!');
-                } else {
-                    console.log(res.status);
-                }
+                console.log(res.data);
+                return res.data;
             });
     }
 
@@ -24,9 +21,9 @@ function CountryService($log, $http) {
             data: data
         }).then(function (res) {
             $log.log(res.data);
-            return res.status;
+            return 'Success!';
         }, function (res) {
-            return res.status;
+            return 'Failure';
         });
     }
 

@@ -17,15 +17,53 @@ describe('SearchbarController', function () {
             'countryService': countryService,
             'selectService': selectService
         });
-
-        fetchSpy = spyOn(countryService, 'fetch');
-        selectSpy = spyOn(selectService, 'select')
     }));
 
-    it('should fetch matching countries if length of searchword > 1', function () {
+    it('should call fetch when length of searchword > 1', function () {
+        const response = [
+            {
+                name: 'Poland',
+                isocode: 'POL'
+            }
+        ];
         scope.text = 'pol';
-        scope.searchCountry();
-        expect(countryService.fetch(scope.text)).toHaveBeenCalled();
+        const fetchSpy = spyOn(countryService, 'fetch').and.returnValue(Promise.resolve(response));
+        scope.searchCountry(scope.text);
+
+        expect(fetchSpy).toHaveBeenCalled();
+    });
+
+    it('should fetch matching countries if length of searchword > 1', function () {
+        const response = [
+            {
+                name: 'Poland',
+                isocode: 'POL'
+            }
+        ];
+        const text = 'pol';
+        spyOn(countryService, 'fetch').and.returnValue(Promise.resolve(response));
+
+        countryService.fetch(text)
+            .then((result) => {
+                expect(countryService.post).toHaveBeenCalledWith(isoCodes);
+                expect(result).toEqual(response);
+                expect(scope.countries).toBe(response);
+                done();
+            });
+    });
+
+    it('should return error data on fetch failure', function () {
+        const response = '404 Not found';
+        const text = 'pol';
+        spyOn(countryService, 'fetch').and.returnValue(Promise.reject(response));
+
+        countryService.fetch(text)
+            .then((result) => {
+                expect(countryService.post).toHaveBeenCalledWith(isoCodes);
+                expect(result).toEqual(response);
+                expect(scope.countries).toBe([]);
+                done();
+            });
     });
 
     it('should clear countries array when no match or searchword length < 1', function () {
@@ -40,7 +78,7 @@ describe('SearchbarController', function () {
         expect(scope.countries).toEqual([]);
     });
 
-    it('should select a country from list', function () {
+    it('should call selectService.select() when selecting country', function () {
         const isoCode = 'POL';
         scope.countries = [
             {
@@ -48,7 +86,9 @@ describe('SearchbarController', function () {
                 isocode: 'POL'
             }
         ]
+        selectSpy = spyOn(selectService, 'select');
         scope.selectCountry(isoCode);
+
         expect(selectSpy).toHaveBeenCalled();
     });
 

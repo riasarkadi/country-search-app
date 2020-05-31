@@ -18,7 +18,7 @@ function CountryListController($scope, countryService, selectService) {
     $scope.submitCountries = function () {
         const isoCodes = { isoCodes: selectService.isoCodes() };
 
-        countryService.post(isoCodes).then((res) => $scope.submitMessage = (res === 200) ? 'Success!' : 'Failure!');
+        countryService.post(isoCodes).then((res) => $scope.submitMessage = res);
         selectService.clear();
     }
 }

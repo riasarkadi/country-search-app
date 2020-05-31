@@ -2,35 +2,29 @@ const gulp = require('gulp');
 const concat = require('gulp-concat');
 const browserSync = require('browser-sync').create();
 const sass = require('gulp-sass');
-var babel = require('gulp-babel');
-var uglify = require('gulp-uglify');
+const babel = require('gulp-babel');
+const uglify = require('gulp-uglify');
 
 sass.compiler = require('node-sass');
 
-let devMode = false;
-
-gulp.task('sass', function () {
-    return gulp.src('src/style/**/*.scss')
-        .pipe(sass().on('error', sass.logError))
+gulp.task('sass', done => {
+    gulp.src('src/style/**/*.scss')
+        .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
         .pipe(gulp.dest('dist/css'))
-        .pipe(browserSync.reload({
-            stream: true
-        }));
+    done();
 });
 
-gulp.task('js', function () {
+gulp.task('js', done => {
     gulp.src([
         "node_modules/angular/angular.js",
-        "node_modules/angular-route/angular-route.js",
-        "src/app/**/*.js"
+        "src/app/**/*.js",
+        "!src/app/**/*.spec.js"
     ])
         .pipe(babel({ "presets": ["@babel/preset-env"] }))
         .pipe(uglify())
         .pipe(concat('bundle.js'))
-        .pipe(gulp.dest('dist/js'))
-        .pipe(browserSync.reload({
-            stream: true
-        }));
+        .pipe(gulp.dest('dist/js'));
+    done();
 });
 
 gulp.task('html', function () {
@@ -39,9 +33,6 @@ gulp.task('html', function () {
         'src/index.html'
     ])
         .pipe(gulp.dest('dist'))
-        .pipe(browserSync.reload({
-            stream: true
-        }));
 });
 
 gulp.task('build', gulp.parallel('sass', 'js', 'html'));
@@ -56,8 +47,6 @@ gulp.task('browser-sync', function () {
 });
 
 gulp.task('dev', gulp.parallel('build', 'browser-sync'), function () {
-    devMode = true;
-
     gulp.watch('src/style/**/*.scss', 'sass');
     gulp.watch('src/app/**/*.js', 'js');
     gulp.watch('src/app/**/*.html', 'html');

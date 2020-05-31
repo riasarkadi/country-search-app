@@ -1,10 +1,9 @@
-<div class="searchbar" tabindex="0" ng-blur="$ctrl.blurHandler()">
+<div class="searchbar" tabindex="0" ng-blur="blurHandler()">
     <div class="ui fluid input">
-        <input autocomplete="off" type="text" placeholder="Search..." ng-model="$ctrl.text"
-            ng-keyup="$ctrl.keyUpHandler()" />
+        <input autocomplete="off" type="text" placeholder="Search..." ng-model="text" ng-keyup="searchCountry()" />
     </div>
-    <div class="searchlist ui vertical menu fluid" ng-if="$ctrl.countries.length > 0">
-        <a ng-click="$ctrl.clickHandler(country.isoCode)" ng-repeat="country in $ctrl.countries"
+    <div class="searchlist ui vertical menu fluid" ng-if="countries.length > 0">
+        <a ng-click="selectCountry(country.isoCode)" ng-repeat="country in countries"
             class="item">{{ country.name }}</a>
     </div>
 </div>

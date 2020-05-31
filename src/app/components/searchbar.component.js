@@ -1,31 +1,31 @@
-app.component('searchbar', {
-    templateUrl: 'components/searchbar.component.html',
-    controller: SearchbarController
-});
+app.
+    controller('SearchbarController', SearchbarController).
+    component('searchbar', {
+        templateUrl: 'components/searchbar.component.html',
+        controller: SearchbarController
+    });
 
-SearchbarController.$inject = ['countryService', 'selectService'];
+SearchbarController.$inject = ['$scope', 'countryService', 'selectService'];
 
-function SearchbarController(countryService, selectService) {
-    this.test = 'test';
+function SearchbarController($scope, countryService, selectService) {
 
-    this.clickHandler = function (code) {
-        const country = this.countries.filter(c => c.isoCode === code)[0];
-        selectService.select(country);
-    }
-
-    this.keyUpHandler = function () {
-        if (this.text.length > 1) {
-            countryService.fetch(this.text).then((data) => {
-                this.countries = data;
+    $scope.searchCountry = function () {
+        if ($scope.text.length > 1) {
+            countryService.fetch($scope.text).then((data) => {
+                $scope.countries = data;
             });
         } else {
-            this.countries = [];
+            $scope.countries = [];
         }
     }
 
-    this.blurHandler = function () {
-        this.countries = [];
-        console.log('blurs');
+    $scope.selectCountry = function (code) {
+        const country = $scope.countries.filter(c => c.isoCode === code)[0];
+        selectService.select(country);
+    }
+
+    $scope.blurHandler = function () {
+        $scope.countries = [];
     }
 
 }

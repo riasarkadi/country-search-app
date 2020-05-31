@@ -4,16 +4,20 @@
   "description": "country search",
   "main": "index.js",
   "scripts": {
+    "start": "concurrently \"npm:server\" \"npm:dev\"",
     "dev": "gulp dev",
+    "build": "gulp build",
     "server": "cross-env NODE_ENV=development nodemon ./server/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jasmine"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.10.1",
     "@babel/preset-env": "^7.10.1",
+    "angular-mocks": "^1.6.10",
     "browser-sync": "^2.26.7",
+    "concurrently": "^5.2.0",
     "cors": "^2.8.5",
     "cross-env": "^7.0.2",
     "gulp": "^4.0.2",
@@ -25,12 +29,16 @@
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
     "gulp-util": "^3.0.8",
+    "jasmine": "^3.5.0",
+    "karma": "^5.0.9",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-jasmine": "^3.3.1",
+    "karma-phantomjs-launcher": "^1.0.4",
     "node-sass": "^4.14.1",
     "nodemon": "^2.0.4"
   },
   "dependencies": {
     "angular": "^1.6.10",
-    "angular-route": "^1.6.10",
     "body-parser": "^1.19.0",
     "express": "^4.17.1"
   }

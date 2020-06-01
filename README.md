@@ -1,8 +1,9 @@
 ### Country search app
 
 Client: Angular JS 1.6.10<br />
-Mockserver: Node + Express<br />
+Mockserver: Node and Express.js<br />
 Tests: Jasmine and Karma<br />
+Task runner: Gulp<br />
 
 #### Available Scripts
 

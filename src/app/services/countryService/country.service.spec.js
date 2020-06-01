@@ -2,20 +2,12 @@ describe('countryService', function () {
 
     beforeEach(module('countrySearch'));
 
-    let $controller;
-    let scope;
     let countryService;
     let httpBackend;
 
-    beforeEach(inject(function ($rootScope, _$controller_, _countryService_, _$httpBackend_) {
-        scope = $rootScope.$new();
+    beforeEach(inject(function (_countryService_, _$httpBackend_) {
         httpBackend = _$httpBackend_;
         countryService = _countryService_;
-        $controller = _$controller_;
-        SearchbarController = $controller('SearchbarController', {
-            '$scope': scope,
-            'countryService': countryService
-        });
     }));
 
     describe('fetch', function () {

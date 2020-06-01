@@ -26,9 +26,9 @@ describe('SearchbarController', function () {
                 isocode: 'POL'
             }
         ];
-        scope.text = 'pol';
+        selectService.input = 'pol';
         const fetchSpy = spyOn(countryService, 'fetch').and.returnValue(Promise.resolve(response));
-        scope.searchCountry(scope.text);
+        scope.searchCountry(selectService.input);
 
         expect(fetchSpy).toHaveBeenCalled();
     });

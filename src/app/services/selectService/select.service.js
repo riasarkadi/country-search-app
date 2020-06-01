@@ -4,6 +4,8 @@ SelectService.$inject = [];
 
 function SelectService() {
     let selected = [];
+    let input = '';
+    let response = '';
 
     const select = (country) => {
         if (selected.length > 0) {
@@ -25,15 +27,19 @@ function SelectService() {
         }
     }
 
-    const clear = () => selected.splice(0, selected.length);
+    const clear = () => {
+        selected.splice(0, selected.length);
+    }
 
     const isoCodes = () => selected.map(c => c.isoCode);
 
     return {
+        input: input,
         select: select,
         remove: remove,
         clear: clear,
         countries: selected,
-        isoCodes: isoCodes
+        isoCodes: isoCodes,
+        response: response
     }
 }

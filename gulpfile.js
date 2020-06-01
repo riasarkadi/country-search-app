@@ -27,12 +27,13 @@ gulp.task('js', done => {
     done();
 });
 
-gulp.task('html', function () {
-    return gulp.src([
+gulp.task('html', done => {
+    gulp.src([
         'src/app/**/*.html',
         'src/index.html'
     ])
         .pipe(gulp.dest('dist'))
+    done();
 });
 
 gulp.task('build', gulp.parallel('sass', 'js', 'html'));

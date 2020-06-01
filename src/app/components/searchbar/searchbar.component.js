@@ -10,11 +10,11 @@ SearchbarController.$inject = ['$scope', 'countryService', 'selectService'];
 function SearchbarController($scope, countryService, selectService) {
     $scope.countries = [];
     $scope.active = false;
-    $scope.text = '';
+    $scope.selectService = selectService;
 
     $scope.searchCountry = function () {
-        if ($scope.text.length > 1) {
-            countryService.fetch($scope.text).then((data) => {
+        if (selectService.input.length > 1) {
+            countryService.fetch(selectService.input).then((data) => {
                 if (data.length > 0) {
                     $scope.countries = data;
                     $scope.active = true;
@@ -28,6 +28,7 @@ function SearchbarController($scope, countryService, selectService) {
     $scope.selectCountry = function (code) {
         const country = $scope.countries.filter(c => c.isoCode === code)[0];
         selectService.select(country);
+        selectService.response = '';
     }
 
     $scope.disactivate = function () {

@@ -7,4 +7,4 @@
 </div>
 <button ng-click="submitCountries()" type="submit" ng-disabled="selectedCountries.length === 0"
     class="ui secondary button right">Submit</button>
-<span ng-if="submitMessage" class="submit-message">{{ submitMessage }}</span>
+<span ng-if="selectService.response" class="submit-message">{{ selectService.response }}</span>

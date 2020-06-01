@@ -2,18 +2,10 @@ describe('selectService', function () {
 
     beforeEach(module('countrySearch'));
 
-    let $controller;
-    let scope;
     let selectService;
 
-    beforeEach(inject(function ($rootScope, _$controller_, _selectService_) {
-        scope = $rootScope.$new();
+    beforeEach(inject(function (_selectService_) {
         selectService = _selectService_;
-        $controller = _$controller_;
-        SearchbarController = $controller('SearchbarController', {
-            '$scope': scope,
-            'selectService': selectService
-        });
     }));
 
     describe('select()', function () {

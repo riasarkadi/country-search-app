@@ -1,0 +1,43 @@
+.app {
+    padding: 2em 0;
+    
+    h1 {
+        margin-bottom: 2em;
+        font-size: 20px;
+        text-align: center;
+        background: #000;
+        color: #fff;
+        border-radius: 2px;
+        padding: 5px;
+    }
+}
+.searchbar {
+    position: relative;
+    border: none;
+    outline: none;
+
+    .searchlist {
+        position: absolute;
+        left: 0;
+        top: 37px;
+    }
+}
+.country-list {
+    min-height: 100px;
+    padding: 0 0 1em 0;
+
+    .submit-message {
+        display: inline-block;
+        margin: 0 10px;
+    }
+}
+
+// semantic overrides
+
+.ui.menu {
+    margin-top: 0;
+    border-radius: 0;
+}
+.ui.label {
+    margin-bottom: 5px;
+}

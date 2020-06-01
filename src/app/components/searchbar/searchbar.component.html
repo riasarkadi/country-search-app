@@ -1,0 +1,10 @@
+<div class="searchbar" ng-attr-tabindex="0" ng-blur="disactivate()">
+    <div class="ui fluid input">
+        <input autocomplete="off" type="text" placeholder="Search..." ng-model="selectService.input"
+            ng-keydown="focusDropdown()" ng-keyup="searchCountry()" />
+    </div>
+    <div id="searchlist" class="ui vertical menu fluid" ng-if="active">
+        <a ng-click="selectCountry(country.isoCode)" ng-repeat="country in countries"
+            class="item">{{ country.name }}</a>
+    </div>
+</div>

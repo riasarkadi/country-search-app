@@ -1,10 +1,10 @@
-Country search app
+### Country search app
 
 Client: Angular JS 1.6.10<br />
 Mockserver: Node + Express<br />
 Tests: Jasmine and Karma<br />
 
-## Available Scripts
+#### Available Scripts
 
 > npm install<br />
 > npm run start ---> start server and client<br />

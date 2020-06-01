@@ -20,7 +20,7 @@ gulp.task('js', done => {
         "src/app/**/*.js",
         "!src/app/**/*.spec.js"
     ])
-        .pipe(babel({ "presets": ["@babel/preset-env"] }))
+        .pipe(babel({ "presets": ["@babel/preset-env"], "compact": false }))
         .pipe(uglify())
         .pipe(concat('bundle.js'))
         .pipe(gulp.dest('dist/js'));

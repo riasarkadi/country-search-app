@@ -66,16 +66,12 @@ describe('SearchbarController', function () {
             });
     });
 
-    it('should clear countries array when no match or searchword length < 1', function () {
-        scope.text = '';
-        scope.countries = [
-            {
-                name: 'Poland',
-                isocode: 'POL'
-            }
-        ];
+    it('should disactivate() when no match or searchword length <= 1', function () {
+        scope.active = true;
+        const disactivateSpy = spyOn(scope, 'disactivate');
         scope.searchCountry();
-        expect(scope.countries).toEqual([]);
+
+        expect(disactivateSpy).toHaveBeenCalled();
     });
 
     it('should call selectService.select() when selecting country', function () {

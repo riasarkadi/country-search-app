@@ -1,9 +1,9 @@
-<div class="display">
+<div class="country-list">
     <a ng-click="removeCountry(selected.isoCode)" class="ui label" ng-repeat="selected in selectedCountries">
         {{ selected.name }}
         <i class="delete icon"></i>
     </a>
-    <span ng-hide="selectedCountries.length > 0">No country selected yet</span>
+    <span ng-hide="selectedCountries.length > 0">{{ countryListMessage }}</span>
 </div>
 <button ng-click="submitCountries()" type="submit" ng-disabled="selectedCountries.length === 0"
     class="ui secondary button right">Submit</button>

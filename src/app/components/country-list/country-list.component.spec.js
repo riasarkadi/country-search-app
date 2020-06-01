@@ -48,6 +48,21 @@ describe('CountryListController', function () {
             });
     });
 
+
+    it('should clear selected items after submit if response is "Success!"', function () {
+        const isoCodes = { isoCodes: ['POL', 'HUN'] };
+        const response = 'Success!';
+        scope.countryListMessage = '';
+        spyOn(countryService, 'post').and.returnValue(Promise.resolve(response));
+
+        countryService.post(isoCodes)
+            .then(() => {
+                expect(selectService.clear()).toHaveBeenCalled();
+                expect(scope.countryListMessage).toBe('No country selected yet');
+                done();
+            });
+    });
+
     it('should set submitMessage to response value "Failure!" on post reject', function () {
         const isoCodes = { isoCodes: ['POL', 'HUN'] };
         spyOn(countryService, 'post').and.returnValue(Promise.reject('Failure!'));
@@ -59,12 +74,4 @@ describe('CountryListController', function () {
                 done();
             });
     });
-
-    it('should clear selected items after submit', function () {
-        const isoCodes = { isoCodes: ['POL', 'HUN'] };
-        const clearSpy = spyOn(selectService, 'clear');
-        scope.submitCountries(isoCodes);
-        expect(clearSpy).toHaveBeenCalled();
-    });
-
 });

@@ -1,7 +1,7 @@
 app.
     controller('CountryListController', CountryListController).
     component('countryList', {
-        templateUrl: 'components/country-list.component.html',
+        templateUrl: 'components/country-list/country-list.component.html',
         controller: CountryListController
     });
 
@@ -10,15 +10,21 @@ CountryListController.$inject = ['$scope', 'countryService', 'selectService'];
 function CountryListController($scope, countryService, selectService) {
     $scope.selectedCountries = selectService.countries;
     $scope.submitMessage = '';
+    $scope.countryListMessage = 'No country selected yet';
 
     $scope.removeCountry = function (code) {
-        selectService.remove(code);
+        $scope.selectedCountries = selectService.remove(code);
     }
 
     $scope.submitCountries = function () {
         const isoCodes = { isoCodes: selectService.isoCodes() };
 
-        countryService.post(isoCodes).then((res) => $scope.submitMessage = res);
-        selectService.clear();
+        countryService.post(isoCodes).then((res) => {
+            if (res === 'Success!') {
+                $scope.countryListMessage = 'Select new countries.';
+                selectService.clear();
+            }
+            $scope.submitMessage = res;
+        });
     }
 }

@@ -16,8 +16,20 @@ const countries = [
         "isoCode": "AUT"
     },
     {
+        "name": "Australia",
+        "isoCode": "AUS"
+    },
+    {
         "name": "Germany",
         "isoCode": "DEU"
+    },
+    {
+        "name": "Greece",
+        "isoCode": "GRC"
+    },
+    {
+        "name": "Greenland",
+        "isoCode": "GRL"
     },
     {
         "name": "Italy",
@@ -34,6 +46,30 @@ const countries = [
     {
         "name": "Denmark",
         "isoCode": "DNK"
+    },
+    {
+        "name": "Japan",
+        "isoCode": "JPN"
+    },
+    {
+        "name": "Jamaica",
+        "isoCode": "JAM"
+    },
+    {
+        "name": "Monaco",
+        "isoCode": "MCO"
+    },
+    {
+        "name": "Mongolia",
+        "isoCode": "MNG"
+    },
+    {
+        "name": "Slovakia",
+        "isoCode": "SVK"
+    },
+    {
+        "name": "Slovenia",
+        "isoCode": "SVN"
     }
 ]
 

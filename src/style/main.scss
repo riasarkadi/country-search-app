@@ -13,6 +13,8 @@
 }
 .searchbar {
     position: relative;
+    border: none;
+    outline: none;
 
     .searchlist {
         position: absolute;
@@ -20,18 +22,22 @@
         top: 37px;
     }
 }
+.country-list {
+    min-height: 100px;
+    padding: 0 0 1em 0;
+
+    .submit-message {
+        display: inline-block;
+        margin: 0 10px;
+    }
+}
+
+// semantic overrides
+
 .ui.menu {
     margin-top: 0;
     border-radius: 0;
 }
 .ui.label {
     margin-bottom: 5px;
-}
-.display {
-    min-height: 100px;
-    padding: 0 0 1em 0;
-}
-.post-message {
-    display: inline-block;
-    margin: 0 10px;
 }

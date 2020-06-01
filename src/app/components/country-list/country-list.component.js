@@ -13,7 +13,7 @@ function CountryListController($scope, countryService, selectService) {
     $scope.selectService = selectService;
 
     $scope.removeCountry = function (code) {
-        $scope.selectedCountries = selectService.remove(code);
+        selectService.remove(code);
     }
 
     $scope.submitCountries = function () {

@@ -9,7 +9,8 @@ function CountryService($log, $http) {
         return $http.get(`${urlBase}/countries?search=${param}`)
             .then((res) => {
                 return res.data;
-            }, function (res) {
+            }, function (err) {
+                $log.log(err.data);
                 return [];
             });
     }
@@ -22,7 +23,7 @@ function CountryService($log, $http) {
         }).then(function (res) {
             $log.log(res.data);
             return 'Success!';
-        }, function (res) {
+        }, function (err) {
             return 'Failure!';
         });
     }

@@ -32,10 +32,12 @@ describe('selectService', function () {
             const selected = selectService.countries;
             const isoCode = 'POL';
             const country = { name: 'Poland', isoCode: 'POL' };
+            const country2 = { name: 'Hungary', isoCode: 'HUN' };
             selectService.select(country);
+            selectService.select(country2);
             selectService.remove(isoCode);
 
-            expect(selected).toEqual([]);
+            expect(selected[0].name).toEqual('Hungary');
         })
     })
 
